@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Homework 6</title>
+    <style>
+        table, th, td {
+            border: 1px solid black
+        }
+    </style>
+</head>
+<body>
+
+	<table>
+		<tr>
+			<td>City</td>
+			<td><input type="text" id="txtCity" /></td>
+		</tr>
+		<tr>
+			<td>Country</td>
+			<td><input type="text" id="txtCountry" /></td>
+		</tr>
+	</table>
+
+	<input type="button" id="btnGetWeather" value="Get Weather Data">
+    <input type="button" id="btnVisible" value="Toggle Visibility">
+	<br /> <br />
+
+    <table id="result">
+        <tr>
+            <td>City</td>
+            <td>Weather</td>
+            <td>Description</td>
+        </tr>
+        <tr>
+            <td id="city"></td>
+            <td id="weather"></td>
+            <td id="description"></td>
+        </tr>
+    </table>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#btnGetWeather').click(function () {
+                var resultElement = $('#resultDiv');
+                resultElement.html('');
+                var apiKey = "3b0177706bc9a358c43f91b8df69ef07";
+                var requestData = $('#txtCity').val() + ',' + $('#txtCountry').val() + '&APPID=' + apiKey;
+                var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + requestData;
+
+                $.ajax({
+                    url: url,
+                    method: 'get',
+                    data: { apiKey },
+                    dataType: 'json',
+
+                    success: function (response) {
+                        if (response.message != null) {
+                            resultElement.html(response.message);
+                        }
+                        else {
+                            $('#city').html(response.name);
+                            $('#weather').html(response.weather[0].main)
+                            $('#description').html(response.weather[0].description);
+                        }
+                    },
+
+                    error: function (err) {
+                    	console.log("error");
+                        alert(err.statusTest);
+                    },
+                });
+            });
+
+            $('#btnVisible').click(function () {
+                $('#result').toggle();
+            }); 
+        });		
+	</script>
+</body>
+</html>
