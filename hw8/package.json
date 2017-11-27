@@ -1,0 +1,25 @@
+{
+  "name": "hw8",
+  "version": "1.0.0",
+  "description": "hw8",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacob-craffey/CIS-371.git"
+  },
+  "keywords": [
+    "hw8"
+  ],
+  "author": "Jacob Craffey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jacob-craffey/CIS-371/issues"
+  },
+  "homepage": "https://github.com/jacob-craffey/CIS-371#readme",
+  "dependencies": {
+    "redux": "^3.7.2"
+  }
+}

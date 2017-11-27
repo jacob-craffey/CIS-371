@@ -1,0 +1,65 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer-redux/polymer-redux.html">
+<link rel="import" href="../../bower_components/iron-list/iron-list.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="redux-mixin.html">
+
+<dom-module id="hw8-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      iron-list {
+        width: 60vh;
+        height: 50vh;
+      }
+    </style>
+
+    <firebase-app
+      id="app"
+      auth-domain="cis371-hw5-25c8b.firebaseapp.com"
+      database-url="https://cis371-hw5-25c8b.firebaseio.com"
+      api-key="AIzaSyDAmmr10AjZFpSyGBgARYGdUFqJlsA3pU4"
+      storage-bucket="cis371-hw5-25c8b.appspot.com"
+      messaging-sender-id="780892038135">
+    </firebase-app>
+
+    <firebase-query
+      path="/friend"
+      data="{{qryData}}">
+    </firebase-query>
+
+    <iron-list id="friendList" items="[[qryData]]" selection-enabled selected-item="{{selectedItem}}">
+      <template>
+        <div>[[item.name]]</div>
+      </template>
+    </iron-list>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class Hw8App extends ReduxMixin(Polymer.Element) {
+      static get is() { return 'hw8-app'; }
+      static get properties() {
+        return {
+          selectedItem: {
+            type: Object,
+            observer: "_userUpdated"
+          }
+        };
+      }
+
+      _userUpdated(name) {
+        this.dispatch ({type:"SHOW", payload: name});
+      }
+    }
+
+    window.customElements.define(Hw8App.is, Hw8App);
+  </script>
+</dom-module>

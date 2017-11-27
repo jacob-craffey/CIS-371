@@ -1,0 +1,36 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer-redux/polymer-redux.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="redux-mixin.html">
+
+
+<dom-module id="friend-details">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <paper-card></paper-card>
+    
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class FriendDetails extends ReduxMixin(Polymer.Element) {
+      static get is() { return 'friend-details'; }
+      static get properties() {
+        return {}
+    };
+    }
+
+
+    window.customElements.define(FriendDetails.is, FriendDetails);
+  </script>
+</dom-module>
